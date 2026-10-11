@@ -14,7 +14,9 @@ COPY .mvn .mvn
 RUN ./mvnw dependency:go-offline -B || true
 
 # Copy source code and compile production JAR
-COPY src src
+COPY . .
+
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests -B
 
 # Extract layered Spring Boot jar for optimized container caching
